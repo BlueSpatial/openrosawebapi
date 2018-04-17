@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://opendatakit.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>kampan</h:title>
+    <model xmlns="">
+      <instance>
+        <kampan id="kampan" version="1">
+          <title></title>
+          <genre></genre>
+          <author></author>
+          <meta>
+            <instanceID />
+          </meta>
+        </kampan>
+      </instance>
+      <bind nodeset="/kampan/title" type="string" required="true()" />
+      <bind nodeset="/kampan/genre" type="select1" />
+      <bind nodeset="/kampan/author" type="string" required="true()" />
+      <bind nodeset="/kampan/meta/instanceID" type="string" preload="uid" />
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/kampan/title" xmlns="">
+      <label>whats the title?</label>
+    </input>
+    <select1 ref="/kampan/genre" xmlns="">
+      <label>what is the genre?</label>
+      <item>
+        <value>horror</value>
+        <label>horror</label>
+      </item>
+      <item>
+        <value>fantasy</value>
+        <label>fantasy</label>
+      </item>
+      <item>
+        <value>funny</value>
+        <label>funny</label>
+      </item>
+    </select1>
+    <input ref="/kampan/author" xmlns="">
+      <label>where's your home?</label>
+    </input>
+  </h:body>
+</h:html>

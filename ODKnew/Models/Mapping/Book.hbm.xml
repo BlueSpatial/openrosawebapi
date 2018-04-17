@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="ODKnew" namespace="ODKnew.Models">
+  <class name="Book" table="Book" dynamic-update="true" >
+    <cache usage="read-write"/>
+    <id name="Id" >
+       <generator class="guid" />
+    </id>
+
+    <property name="Title"  />
+    <property name="Author" />
+    <property name="Genre" />
+  </class>
+</hibernate-mapping>
