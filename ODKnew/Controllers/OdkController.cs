@@ -376,21 +376,29 @@ namespace ODKnew.Controllers
             
 
         }
-        public string submissionData(string path, string name)
+        public Buku submissionData(string path)
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\submissions\\" + path + "\\data.xml"));
-            string nodeList = xmlDoc.DocumentElement.Name;
-            string datanya = xmlDoc.DocumentElement.SelectSingleNode("/" + nodeList + "/" + name).FirstChild.Value;
-            return datanya;
+            //XmlDocument xmlDoc = new XmlDocument();
+            //xmlDoc.Load(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\submissions\\" + path + "\\data.xml"));
+            //string nodeList = xmlDoc.DocumentElement.Name;
+            //string datanya = xmlDoc.DocumentElement.SelectSingleNode("/" + nodeList + "/" + name).FirstChild.Value;
+            
+            string pathnda = System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\submissions\\" + path + "\\data.xml");
+
+            XmlSerializer serializer = new XmlSerializer(typeof(Buku));
+
+            StreamReader reader = new StreamReader(pathnda);
+            Buku buku = (Buku)serializer.Deserialize(reader);
+            reader.Close();
+            return buku;
         }
         public void saveSubmission(string path)
         {
             IList<Book> books;
             Book book = new Book();     //  Creating a new instance of the Book
-            book.Title = submissionData(path, "title");
-            book.Genre = submissionData(path, "genre");
-            book.Author = submissionData(path, "author");
+            book.Title = submissionData(path).title;
+            book.Genre = submissionData(path).genre;
+            book.Author = submissionData(path).author;
             using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
             {
                 using (ITransaction transaction = session.BeginTransaction())   //  Begin a transaction

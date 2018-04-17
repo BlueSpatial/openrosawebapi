@@ -10,7 +10,19 @@ using System.Xml.Linq;
 
 namespace ODKnew
 {
-    
+    [Serializable()]
+    [XmlRoot("kampan")]
+    public class Buku
+    {
+        [System.Xml.Serialization.XmlElement("title")]
+        public string title { get; set; }
+
+        [System.Xml.Serialization.XmlElement("genre")]
+        public string genre { get; set; }
+
+        [System.Xml.Serialization.XmlElement("author")]
+        public string author { get; set; }
+    }
     public class CreateOdkForm
     {
         //public string title;
