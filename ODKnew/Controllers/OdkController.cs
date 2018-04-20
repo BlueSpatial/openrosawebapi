@@ -54,7 +54,7 @@ namespace ODKnew.Controllers
                         writer.WriteStartElement("mediafile");
                         writer.WriteElementString("filename", a.Split('\\')[a.Split('\\').Length-1]);
                         writer.WriteElementString("hash", "md5:"+md5);
-                        writer.WriteElementString("downloadUrl", "https://pandakecil.localtunnel.me/downloadfile/" + letak+"/"+Base64Encode(a.Split('\\')[a.Split('\\').Length - 1]));
+                        writer.WriteElementString("downloadUrl", "https://"+HttpContext.Current.Request.Url.Host+"/downloadfile/" + letak+"/"+Base64Encode(a.Split('\\')[a.Split('\\').Length - 1]));
                         writer.WriteEndElement();
 
                     }
@@ -119,11 +119,11 @@ namespace ODKnew.Controllers
                         if (version != null) {
                             writer.WriteElementString("version", version);
                         }
-                        writer.WriteElementString("downloadUrl", "https://pandakecil.localtunnel.me/downloadform/"+Base64Encode(id));
+                        writer.WriteElementString("downloadUrl", "https://"+HttpContext.Current.Request.Url.Host+"/downloadform/"+Base64Encode(id));
                         
                         if (Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\forms\\" +id + "-media")))
                         {
-                            writer.WriteElementString("manifestUrl", "https://pandakecil.localtunnel.me/downloadmanifest/" + Base64Encode(id + "-media"));
+                            writer.WriteElementString("manifestUrl", "https://"+HttpContext.Current.Request.Url.Host+"/downloadmanifest/" + Base64Encode(id + "-media"));
                         }
                         writer.WriteEndElement();
 
@@ -153,7 +153,7 @@ namespace ODKnew.Controllers
             if (lucu != null)
             {
                 HttpContext.Current.Response.AppendHeader("X-Openrosa-Version", "1.0");
-                HttpContext.Current.Response.AppendHeader("Location", "https://pandakecil.localtunnel.me/submission?deviceID="+HttpUtility.UrlEncode(deviceID) );
+                HttpContext.Current.Response.AppendHeader("Location", "https://"+HttpContext.Current.Request.Url.Host+"/submission?deviceID="+HttpUtility.UrlEncode(deviceID) );
                 return new HttpResponseMessage() { StatusCode = HttpStatusCode.NoContent };
             }
             else {

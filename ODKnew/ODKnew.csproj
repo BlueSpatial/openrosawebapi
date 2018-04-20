@@ -230,9 +230,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="hibernate.cfg.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Models\Mapping\Book.hbm.xml" />
     <Content Include="Models\hibernate.cfg.xml">
       <SubType>Designer</SubType>
