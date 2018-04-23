@@ -94,51 +94,60 @@ namespace ODKnew.Controllers
         [HttpGet]
         public HttpResponseMessage Gendeng()
         {
-            if (Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\forms")))
-            {
+            //if (Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\forms")))
+            //{
                 using (var stringWriter = new StringWriter())
 
                 using (XmlWriter writer = XmlWriter.Create(stringWriter))
                 {
                     writer.WriteStartElement("xforms", "http://openrosa.org/xforms/xformsList");
                     writer.WriteAttributeString("xmlns", "http://openrosa.org/xforms/xformsList");
-                    string[] array1 = Directory.GetFiles(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\forms"),"*.xml");
-                    foreach (string a in array1) {
-                        XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(File.ReadAllText(@a));
-                        XmlNodeList punuk = doc.GetElementsByTagName("instance");
-                        string name= doc.GetElementsByTagName("h:title")[0].InnerText;
-                        string id = punuk[0].FirstChild.Name;
-                        string version = punuk[0].FirstChild.Attributes["version"]==null?null: punuk[0].FirstChild.Attributes["version"].Value;
-                        string md5 = "md5:" + MD5Hash(File.ReadAllText(@a));
-                        string downloadForm = id;
+                //string[] array1 = Directory.GetFiles(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\forms"),"*.xml");
+                CreateOdkForm punuk = new CreateOdkForm();
+                List<FormItem> pakan = new List<FormItem>();
+                pakan.Add(new FormItem() { value = "horror", label = "horror" });
+                pakan.Add(new FormItem() { value = "fantasy", label = "fantasy" });
+                pakan.Add(new FormItem() { value = "funny", label = "funny" });
+                punuk.createInputForm(nameof(Book.Title), "whats the title?", new Tipe().TipeString, new Required().TRUE, null);
+                punuk.createSelect1Form(nameof(Book.Genre), "what is the genre?", null, null, null, pakan);
+                punuk.createInputForm(nameof(Book.Author), "whats the name of the author?", new Tipe().TipeString, new Required().TRUE, null);
+                
+                //foreach (string a in array1) {
+                        //XmlDocument doc = new XmlDocument();
+                        //doc.LoadXml(File.ReadAllText(@a));
+                        //XmlNodeList punuk = doc.GetElementsByTagName("instance");
+                        //string name= doc.GetElementsByTagName("h:title")[0].InnerText;
+                        //string id = punuk[0].FirstChild.Name;
+                        //string version = punuk[0].FirstChild.Attributes["version"]==null?null: punuk[0].FirstChild.Attributes["version"].Value;
+                        string md5 = "md5:" + MD5Hash(punuk.createTheForm(nameof(Book), 1).ToString());
+                        string downloadForm = nameof(Book);
                         writer.WriteStartElement("xform");
-                        writer.WriteElementString("name", name);
-                        writer.WriteElementString("formID", id);
+                        writer.WriteElementString("name", nameof(Book));
+                        writer.WriteElementString("formID", nameof(Book));
                         writer.WriteElementString("hash", md5);
-                        if (version != null) {
-                            writer.WriteElementString("version", version);
-                        }
-                        writer.WriteElementString("downloadUrl", "https://"+HttpContext.Current.Request.Url.Host+"/downloadform/"+Base64Encode(id));
+                        //if (version != null) {
+                            writer.WriteElementString("version", "1");
+                        //}
+                        writer.WriteElementString("downloadUrl", "https://"+HttpContext.Current.Request.Url.Host+"/downloadform/"+Base64Encode(nameof(Book)));
                         
-                        if (Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\forms\\" +id + "-media")))
+                        if (Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\forms\\" +nameof(Book) + "-media")))
                         {
-                            writer.WriteElementString("manifestUrl", "https://"+HttpContext.Current.Request.Url.Host+"/downloadmanifest/" + Base64Encode(id + "-media"));
+                            writer.WriteElementString("manifestUrl", "https://"+HttpContext.Current.Request.Url.Host+"/downloadmanifest/" + Base64Encode(nameof(Book) + "-media"));
                         }
                         writer.WriteEndElement();
 
-                    }
+                    //}
                     
                     writer.WriteEndElement();
                     writer.WriteEndDocument();
                     writer.Flush();
                     return new HttpResponseMessage() { Content = new StringContent(stringWriter.GetStringBuilder().ToString(), Encoding.UTF8, "text/xml"), StatusCode = HttpStatusCode.OK };
                 }
-            }
-            else {
-                return new HttpResponseMessage() { Content = new StringContent("Directory forms not found"), StatusCode = HttpStatusCode.NotFound };
-            }
-        }
+    //}
+    //else {
+    //    return new HttpResponseMessage() { Content = new StringContent("Directory forms not found"), StatusCode = HttpStatusCode.NotFound };
+    //}
+}
         [Route("submission")]
         [HttpHead]
         public HttpResponseMessage Posos(string deviceID)
@@ -284,9 +293,9 @@ namespace ODKnew.Controllers
             pakan.Add(new FormItem() {  value = "horror",label="horror" });
             pakan.Add(new FormItem() {  value = "fantasy",label="fantasy" });
             pakan.Add(new FormItem() {  value = "funny",label="funny" });
-            punuk.createInputForm("title","whats the title?",new Tipe().TipeString,new Required().TRUE,null);
-            punuk.createSelect1Form("genre", "what is the genre?", null, null, null, pakan);
-            punuk.createInputForm("author", "whats the name of the author?", new Tipe().TipeString, new Required().TRUE, null);
+            punuk.createInputForm(nameof(Buku.title),"whats the title?",new Tipe().TipeString,new Required().TRUE,null);
+            punuk.createSelect1Form(nameof(Buku.genre), "what is the genre?", null, null, null, pakan);
+            punuk.createInputForm(nameof(Buku.author), "whats the name of the author?", new Tipe().TipeString, new Required().TRUE, null);
             return new HttpResponseMessage { Content = new StringContent(punuk.createTheForm("kampan",1).ToString()), StatusCode = HttpStatusCode.OK };
         }
         [Route("lanjutkanwes")]
@@ -376,7 +385,7 @@ namespace ODKnew.Controllers
             
 
         }
-        public Buku submissionData(string path)
+        public Book submissionData(string path)
         {
             //XmlDocument xmlDoc = new XmlDocument();
             //xmlDoc.Load(System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\submissions\\" + path + "\\data.xml"));
@@ -385,10 +394,10 @@ namespace ODKnew.Controllers
             
             string pathnda = System.Web.HttpContext.Current.Server.MapPath("~\\App_Data\\submissions\\" + path + "\\data.xml");
 
-            XmlSerializer serializer = new XmlSerializer(typeof(Buku));
+            XmlSerializer serializer = new XmlSerializer(typeof(Book));
 
             StreamReader reader = new StreamReader(pathnda);
-            Buku buku = (Buku)serializer.Deserialize(reader);
+            Book buku = (Book)serializer.Deserialize(reader);
             reader.Close();
             return buku;
         }
@@ -396,9 +405,9 @@ namespace ODKnew.Controllers
         {
             IList<Book> books;
             Book book = new Book();     //  Creating a new instance of the Book
-            book.Title = submissionData(path).title;
-            book.Genre = submissionData(path).genre;
-            book.Author = submissionData(path).author;
+            book.Title = submissionData(path).Title;
+            book.Genre = submissionData(path).Genre;
+            book.Author = submissionData(path).Author;
             using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
             {
                 using (ITransaction transaction = session.BeginTransaction())   //  Begin a transaction

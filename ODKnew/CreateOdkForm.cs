@@ -25,8 +25,7 @@ namespace ODKnew
     }
     public class CreateOdkForm
     {
-        //public string title;
-        //public string version;
+        
         public List<FormType> formTipe=new List<FormType>();
         public void createInputForm(string dataName,string label,string tipe,string required,string readOnly) {
             FormType panda = new FormType();

@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://opendatakit.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
-    <h:title>kampan</h:title>
+    <h:title>Book</h:title>
     <model xmlns="">
       <instance>
-        <kampan id="kampan" version="1">
-          <title></title>
-          <genre></genre>
-          <author></author>
+        <Book id="Book" version="1">
+          <Title></Title>
+          <Genre></Genre>
+          <Author></Author>
           <meta>
             <instanceID />
           </meta>
-        </kampan>
+        </Book>
       </instance>
-      <bind nodeset="/kampan/title" type="string" required="true()" />
-      <bind nodeset="/kampan/genre" type="select1" />
-      <bind nodeset="/kampan/author" type="string" required="true()" />
-      <bind nodeset="/kampan/meta/instanceID" type="string" preload="uid" />
+      <bind nodeset="/Book/Title" type="string" required="true()" />
+      <bind nodeset="/Book/Genre" type="select1" />
+      <bind nodeset="/Book/Author" type="string" required="true()" />
+      <bind nodeset="/Book/meta/instanceID" type="string" preload="uid" />
     </model>
   </h:head>
   <h:body>
-    <input ref="/kampan/title" xmlns="">
+    <input ref="/Book/Title" xmlns="">
       <label>whats the title?</label>
     </input>
-    <select1 ref="/kampan/genre" xmlns="">
+    <select1 ref="/Book/Genre" xmlns="">
       <label>what is the genre?</label>
       <item>
         <value>horror</value>
@@ -38,7 +38,7 @@
         <label>funny</label>
       </item>
     </select1>
-    <input ref="/kampan/author" xmlns="">
+    <input ref="/Book/Author" xmlns="">
       <label>whats the name of the author?</label>
     </input>
   </h:body>
