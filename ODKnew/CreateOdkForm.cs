@@ -37,33 +37,33 @@ namespace ODKnew
             panda.readOnly = readOnly;
             formTipe.Add(panda);
         }
-        public void createUploadForm(string dataName, string label, string tipe, string required, string readOnly) {
+        public void createUploadForm(string dataName, string label, string binaryTipe, string required, string readOnly) {
             FormType panda = new FormType();
             panda.dataName = dataName;
             panda.name = "upload";
             panda.label = label;
-            panda.binaryTipe = tipe;
+            panda.binaryTipe = binaryTipe;
             panda.required = required;
             panda.readOnly = readOnly;
             formTipe.Add(panda);
         }
-        public void createSelectForm(string dataName, string label, string tipe, string required, string readOnly, List<FormItem> item) {
+        public void createSelectForm(string dataName, string label, string required, string readOnly, List<FormItem> item) {
             FormType panda = new FormType();
             panda.dataName = dataName;
             panda.name = "select";
             panda.label = label;
-            panda.tipe = tipe;
+            //panda.tipe = tipe;
             panda.required = required;
             panda.readOnly = readOnly;
             panda.item = item;
             formTipe.Add(panda);
         }
-        public void createSelect1Form(string dataName, string label, string tipe, string required, string readOnly, List<FormItem> item) {
+        public void createSelect1Form(string dataName, string label, string required, string readOnly, List<FormItem> item) {
             FormType panda = new FormType();
             panda.dataName = dataName;
             panda.name = "select1";
             panda.label = label;
-            panda.tipe = tipe;
+            //panda.tipe = tipe;
             panda.required = required;
             panda.readOnly = readOnly;
             panda.item = item;

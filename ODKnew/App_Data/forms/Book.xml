@@ -8,14 +8,16 @@
           <Title></Title>
           <Genre></Genre>
           <Author></Author>
+          <wow></wow>
           <meta>
             <instanceID />
           </meta>
         </Book>
       </instance>
       <bind nodeset="/Book/Title" type="string" required="true()" />
-      <bind nodeset="/Book/Genre" type="select1" />
+      <bind nodeset="/Book/Genre" type="select" />
       <bind nodeset="/Book/Author" type="string" required="true()" />
+      <bind nodeset="/Book/wow" type="barcode" />
       <bind nodeset="/Book/meta/instanceID" type="string" preload="uid" />
     </model>
   </h:head>
@@ -23,7 +25,7 @@
     <input ref="/Book/Title" xmlns="">
       <label>whats the title?</label>
     </input>
-    <select1 ref="/Book/Genre" xmlns="">
+    <select ref="/Book/Genre" xmlns="">
       <label>what is the genre?</label>
       <item>
         <value>horror</value>
@@ -37,9 +39,12 @@
         <value>funny</value>
         <label>funny</label>
       </item>
-    </select1>
+    </select>
     <input ref="/Book/Author" xmlns="">
       <label>whats the name of the author?</label>
+    </input>
+    <input ref="/Book/wow" xmlns="">
+      <label>whats the name of the intent?</label>
     </input>
   </h:body>
 </h:html>

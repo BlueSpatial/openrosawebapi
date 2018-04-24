@@ -109,17 +109,18 @@ namespace ODKnew.Controllers
                 pakan.Add(new FormItem() { value = "fantasy", label = "fantasy" });
                 pakan.Add(new FormItem() { value = "funny", label = "funny" });
                 punuk.createInputForm(nameof(Book.Title), "whats the title?", new Tipe().TipeString, new Required().TRUE, null);
-                punuk.createSelect1Form(nameof(Book.Genre), "what is the genre?", null, null, null, pakan);
+                punuk.createSelectForm(nameof(Book.Genre), "what is the genre?", null, null, pakan);
                 punuk.createInputForm(nameof(Book.Author), "whats the name of the author?", new Tipe().TipeString, new Required().TRUE, null);
-                
+                punuk.createInputForm("wow", "whats the name of the intent?", new Tipe().TipeBarcode, null, null);
+
                 //foreach (string a in array1) {
-                        //XmlDocument doc = new XmlDocument();
-                        //doc.LoadXml(File.ReadAllText(@a));
-                        //XmlNodeList punuk = doc.GetElementsByTagName("instance");
-                        //string name= doc.GetElementsByTagName("h:title")[0].InnerText;
-                        //string id = punuk[0].FirstChild.Name;
-                        //string version = punuk[0].FirstChild.Attributes["version"]==null?null: punuk[0].FirstChild.Attributes["version"].Value;
-                        string md5 = "md5:" + MD5Hash(punuk.createTheForm(nameof(Book), 1).ToString());
+                //XmlDocument doc = new XmlDocument();
+                //doc.LoadXml(File.ReadAllText(@a));
+                //XmlNodeList punuk = doc.GetElementsByTagName("instance");
+                //string name= doc.GetElementsByTagName("h:title")[0].InnerText;
+                //string id = punuk[0].FirstChild.Name;
+                //string version = punuk[0].FirstChild.Attributes["version"]==null?null: punuk[0].FirstChild.Attributes["version"].Value;
+                string md5 = "md5:" + MD5Hash(punuk.createTheForm(nameof(Book), 1).ToString());
                         string downloadForm = nameof(Book);
                         writer.WriteStartElement("xform");
                         writer.WriteElementString("name", nameof(Book));
