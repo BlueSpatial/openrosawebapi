@@ -16,9 +16,10 @@ there are 4 type of form in odk collect
 |geopoint|Space-separated list of valid latitude (decimal degrees), longitude (decimal degrees), altitude (decimal meters) and accuracy (decimal meters)|new Tipe().TipeGeopoint;
 |geotrace|Semi-colon-separated list of at least 2 geopoints, where the last geopoint’s latitude and longitude is not equal to the first| new Tipe().TipeGeotrace; 	
 |geoshape|Semi-colon-separated list of at least 3 geopoints, where the last geopoint’s latitude and longitude is equal to the first|new Tipe().TipGeoshape;
-	|binary|String ID (with binary file attached to submission)|new Tipe().TipeBinary;
+|binary|String ID (with binary file attached to submission)|new Tipe().TipeBinary;
 |barcode|As string|new Tipe().TipeBarcode;
 |intent|As string, used for external applications|new Tipe().TipeIntent;
+
 ```
 create input form from class CreateOdkForm like this:
 
