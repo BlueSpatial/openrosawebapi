@@ -20,8 +20,8 @@ there are 4 type of form in odk collect
 |barcode|As string|new Tipe().TipeBarcode;
 |intent|As string, used for external applications|new Tipe().TipeIntent;
 
-```
-create input form from class CreateOdkForm like this:
+```csharp
+//create input form from class CreateOdkForm like this:
 
 createInputForm(string dataName,string label,string tipe,string required,string readOnly)
 ```
@@ -34,8 +34,8 @@ createInputForm(string dataName,string label,string tipe,string required,string 
 |readOnly|is the form readonly or not |new ReadOnly().FALSE;|
 
 2. SELECT
-```
-Select data from multiple checkboxes
+```csharp
+//Select data from multiple checkboxes
 createSelectForm(string dataName, string label, string required, string readOnly, List<FormItem> item) 
 ```
 | Params       | Description     | Example| 
@@ -47,8 +47,8 @@ createSelectForm(string dataName, string label, string required, string readOnly
 |item|List of item to select from | List<FormItem> pakan = new List<FormItem>();               pakan.Add(new FormItem() { value = "horror", label = "horror" });               pakan.Add(new FormItem() { value = "fantasy", label = "fantasy" });                pakan.Add(new FormItem() { value = "funny", label = "funny" });|
 
 3. SELECT1
-```
-Select data from only one checkboxes
+```csharp
+//Select data from only one checkboxes
 createSelect1Form(string dataName, string label, string required, string readOnly, List<FormItem> item) 
 ```
 | Params       | Description     | Example| 
@@ -57,10 +57,12 @@ createSelect1Form(string dataName, string label, string required, string readOnl
 |label|question to asked for  the user|what is the the title of the book?|
 |required|is the form required or not |new Required().TRUE;|
 |readOnly|is the form readonly or not |new ReadOnly().FALSE;|
-|item|List of item to select from | List<FormItem> pakan = new List<FormItem>();               pakan.Add(new FormItem() { value = "horror", label = "horror" });               pakan.Add(new FormItem() { value = "fantasy", label = "fantasy" });                pakan.Add(new FormItem() { value = "funny", label = "funny" });|
+|item|List of item to select from | ```csharp
+List<FormItem> pakan = new List<FormItem>();               pakan.Add(new FormItem() { value = "horror", label = "horror" });               pakan.Add(new FormItem() { value = "fantasy", label = "fantasy" });                pakan.Add(new FormItem() { value = "funny", label = "funny" });
+``` |
 4. UPLOAD
-```
-create upload form from class CreateOdkForm like this:
+```csharp
+//create upload form from class CreateOdkForm like this:
 createUploadForm(string dataName, string label, string binaryTipe, string required, string readOnly)
 ```
 | Params       | Description     | Example| 
@@ -73,7 +75,7 @@ createUploadForm(string dataName, string label, string binaryTipe, string requir
 
 
 ## example on how to create simple odk form with CreateOdkForm class
-```
+```csharp
 CreateOdkForm punuk = new CreateOdkForm();
 List<FormItem> pakan = new List<FormItem>();
 pakan.Add(new FormItem() { value = "horror", label = "horror" });
@@ -86,12 +88,12 @@ punuk.createTheForm(nameof(Book), 1).ToString()
 ```
 
 ### code explained
-```
+```csharp
 CreateOdkForm punuk = new CreateOdkForm();
 ```
 to call the class CreateOdkForm
 
-```
+```csharp
 List<FormItem> pakan = new List<FormItem>();
 pakan.Add(new FormItem() { value = "horror", label = "horror" });
 pakan.Add(new FormItem() { value = "fantasy", label = "fantasy" });
@@ -99,19 +101,19 @@ pakan.Add(new FormItem() { value = "funny", label = "funny" });
 ```
 to create a list of item in the select form
 
-```
+```csharp
 punuk.createInputForm(nameof(Book.Title), "whats the title?", new Tipe().TipeString, new Required().TRUE, null);
 ```
 create input form type string
-```
+```csharp
 punuk.createSelectForm(nameof(Book.Genre), "what is the genre?", null, null, pakan);
 ```
 create Select form 
-```
+```csharp
 punuk.createInputForm(nameof(Book.Author), "whats the name of the author?", new Tipe().TipeString, new Required().TRUE, null);
 ```
 create input  form type string 
-```
+```csharp
 punuk.createTheForm(nameof(Book), 1).ToString()
 ```
 finally create the form with method createTheForm(string name,int version)
