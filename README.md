@@ -57,9 +57,7 @@ createSelect1Form(string dataName, string label, string required, string readOnl
 |label|question to asked for  the user|what is the the title of the book?|
 |required|is the form required or not |new Required().TRUE;|
 |readOnly|is the form readonly or not |new ReadOnly().FALSE;|
-|item|List of item to select from | ```csharp
-List<FormItem> pakan = new List<FormItem>();               pakan.Add(new FormItem() { value = "horror", label = "horror" });               pakan.Add(new FormItem() { value = "fantasy", label = "fantasy" });                pakan.Add(new FormItem() { value = "funny", label = "funny" });
-``` |
+|item|List of item to select from | List<FormItem> pakan = new List<FormItem>();               pakan.Add(new FormItem() { value = "horror", label = "horror" });               pakan.Add(new FormItem() { value = "fantasy", label = "fantasy" });                pakan.Add(new FormItem() { value = "funny", label = "funny" });|
 4. UPLOAD
 ```csharp
 //create upload form from class CreateOdkForm like this:
